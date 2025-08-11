@@ -49,6 +49,13 @@ Route::middleware(['web'])->group(function () {
     Route::post('/login', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store']);
     Route::post('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy']);
 });
+// ✅ Produtos públicos (lista)
+Route::get('/produtos', [ProdutosController::class, 'index'])->name('produtos.index');
+
+// ✅ CRUD público (sem login)
+Route::post('/produtos', [ProdutosController::class, 'store'])->name('produtos.store');
+Route::put('/produtos/{produto}', [ProdutosController::class, 'update'])->name('produtos.update');
+Route::delete('/produtos/{produto}', [ProdutosController::class, 'destroy'])->name('produtos.destroy');
 
 // ✅ Inclui todas as rotas padrão de auth (via Fortify)
 require __DIR__.'/auth.php';
